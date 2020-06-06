@@ -2,21 +2,24 @@
 
 This microservice handles scheduling and removing of meetings
 
+####To start the microservice:
+* Go to the file: <i>'com/test/meetings/MeetingsApplication.java'</i><br>
+* Right-click anywhere on the source<br>
+* Select <i>'Run com.test.meetings.MeetingsApplication.main'</i>
+
+
 ####To schedule a new meeting:<br>
 
 <b>Method:</b> POST<br>
 <b>URL:</b> /meetings<br>
-<b>body:</b><br>
-`{`
-
-`"startTime": "2020-06-07T10:30:26.514+00:00",`
-
-`"endTime": "2020-06-07T11:15:26.514+00:00",`
-
-`"title": "important meeting 2"`
-
-`}`
-`
+<b>body:</b>
+```javascript
+{
+"startTime": "2020-06-07T10:30:26.514+00:00",
+"endTime": "2020-06-07T11:15:26.514+00:00",
+"title": "important meeting 2"
+}
+```
 
 
 ####To remove a meeting by title:<br>
