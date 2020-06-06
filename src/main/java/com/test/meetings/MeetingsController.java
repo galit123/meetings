@@ -1,6 +1,7 @@
 package com.test.meetings;
 
 import com.test.meeting.response.Meeting;
+import com.test.meeting.response.MeetingsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

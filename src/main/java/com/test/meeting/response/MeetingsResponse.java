@@ -1,4 +1,4 @@
-package com.test.meetings;
+package com.test.meeting.response;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.meeting.response.Meeting;
@@ -35,11 +35,4 @@ public class MeetingsResponse {
         this.message = message;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

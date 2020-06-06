@@ -1,10 +1,7 @@
 package com.test.calendar;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 
 class TimestampImpl {

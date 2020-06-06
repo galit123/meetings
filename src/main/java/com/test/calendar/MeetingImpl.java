@@ -4,29 +4,16 @@ import com.test.meeting.response.Meeting;
 import com.test.meetings.MeetingsRunTimeException;
 
 import java.sql.Timestamp;
-import java.time.DayOfWeek;
 import java.util.Calendar;
 
 class MeetingImpl {
     private Meeting meeting;
-
-    Meeting getMeeting() {
-        return meeting;
-    }
 
     static final long MIN_15 = 15 * 60 * 1000;
     static final long HOURS_2 = 2 * 60 * 60 * 1000;
 
     MeetingImpl(Meeting meeting) {
          this.meeting = meeting;
-    }
-
-    int getStartYear() {
-        return new TimestampImpl(getStartTime()).getYear();
-    }
-
-    int getStartWeek() {
-        return new TimestampImpl(getStartTime()).getWeekOfYear();
     }
 
     int getStartTimeDayOfWeek() {
@@ -74,23 +61,8 @@ class MeetingImpl {
         return meeting.getEndTime();
     }
 
-    void setEndTime(Timestamp endTime) {
-        this.meeting.setStartTime(endTime);
-    }
-
-    String getTitle() {
-        return meeting.getTitle();
-    }
-
-    void setTitle(String title) {
-        this.meeting.setTitle(title);
-    }
-
     Timestamp getStartTime() {
         return meeting.getStartTime();
     }
 
-    void setStartTime(Timestamp startTime) {
-        this.meeting.setStartTime(startTime);
-    }
 }

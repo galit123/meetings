@@ -33,26 +33,6 @@ public class MeetingsManager {
         return meetings.getMeetings();
     }
 
-//        public  List<Meeting>  getMeetings(){
-//        List<Meeting> meetings = new ArrayList<Meeting>();
-//        for (int y: this.meetings.getYears().keySet()){
-//            Year year = this.meetings.getYears().get(y);
-//
-//            for (int w: year.getWeeks().keySet()){
-//                Week week = year.getWeeks().get(w);
-//
-//                for (int d: week.getDays().keySet()){
-//                    Day day = week.getDays().get(d);
-//
-//                    for (Meeting m : day.getMeetings()){
-//                        meetings.add(m);
-//                    }
-//                }
-//            }
-//        }
-//        return meetings;
-//    }
-
     public Meeting addMeeting(Meeting meeting) {
         meetings.addMeeting(meeting);
         List<Meeting> meetingsByTitle = meetingsListsByTitle.get(meeting.getTitle());
@@ -64,31 +44,6 @@ public class MeetingsManager {
         return meetings.getMeeting(meeting.getStartTime().getTime());
     }
 
-
-//    public Meeting addMeeting(Meeting meeting){
-//        Day day = meetings.getDayOfMeeting(meeting.getStartTime());
-//        day.addMeeting(meeting);
-//
-//        List<Meeting> meetings = meetingsListsByTitle.get(meeting.getTitle());
-//        if (meetings == null){
-//            meetings = new ArrayList<Meeting>();
-//            meetingsListsByTitle.put(meeting.getTitle(), meetings);
-//        }
-//        meetings.add(meeting);
-//        return meeting;
-//    }
-
-    //    public void removeByTitle(String meetingTitle) {
-//        if (!meetingsListsByTitle.containsKey(meetingTitle)){
-//            throw new MeetingNotFoundException(meetingTitle + " is not found");
-//        }
-//        List<Meeting> meetingsByTitle = meetingsListsByTitle.get(meetingTitle);
-//        for (Meeting m: meetingsByTitle){
-//            Day day = meetings.getDayOfMeeting(m.getStartTime());
-//            day.remove(m);
-//        }
-//        meetingsListsByTitle.remove(meetingTitle);
-//    }
     public void removeByTitle(String meetingTitle) {
         if (!meetingsListsByTitle.containsKey(meetingTitle)) {
             throw new MeetingNotFoundException(meetingTitle + " is not found");
@@ -99,12 +54,7 @@ public class MeetingsManager {
         }
         meetingsListsByTitle.remove(meetingTitle);
     }
-//
-//    public void removeByStartTime(Timestamp fromTime) {
-//        Day day = meetings.getDayOfMeeting(fromTime);
-//        day.removeByStartTime(fromTime);
-//    }
-//
+
     public void removeByStartTime(Timestamp fromTime) {
         meetings.remove(fromTime.getTime());
     }

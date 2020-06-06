@@ -1,38 +1,14 @@
 package com.test.calendar;
 
 import com.test.meeting.response.Meeting;
+import com.test.meetings.MeetingNotFoundException;
 import com.test.meetings.MeetingsRunTimeException;
 
 import java.sql.Timestamp;
 import java.util.*;
 
 public class MeetingsCollection {
-//    private Map<Integer, Year> years = new HashMap<Integer, Year>();
     private TreeMap<Long , Meeting> meetings = new TreeMap<Long, Meeting>();
-
-//    public Map<Integer, Year> getYears() {
-//        return years;
-//    }
-//
-//    public Year getYear(Timestamp startTime){
-//        TimestampImpl ts = new TimestampImpl(startTime);
-//        int yearInx = ts.getYear();
-//        Year year = years.get(yearInx);
-//
-//        if (year == null){
-//            year = new Year(yearInx);
-//            years.put(yearInx,year);
-//        }
-//        return year;
-//    }
-//
-//    public Day getDayOfMeeting(Timestamp fromTime){
-//        Year year = getYear(fromTime);
-//        Week week = year.getStartWeek(fromTime);
-//        Day day = week.getStartDay(fromTime);
-//
-//        return day;
-//    }
 
     public  List<Meeting>  getMeetings(){
         return new ArrayList<Meeting>(meetings.values());
@@ -67,6 +43,11 @@ public class MeetingsCollection {
 
     public Meeting nextMeeting(Timestamp ts) {
         Long nextKey = meetings.ceilingKey(ts.getTime());
+
+        if (nextKey == null){
+            throw new MeetingNotFoundException("Can't find a scheduled future meeting");
+        }
+
         return meetings.get(nextKey);
     }
 
