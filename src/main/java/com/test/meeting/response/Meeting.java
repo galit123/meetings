@@ -1,23 +1,43 @@
 package com.test.meeting.response;
 
-import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Meeting {
-    private Timestamp startTime;
-    private Timestamp endTime;
+    static final String ISO_DATE_FORMAT_ZERO_OFFSET = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+
+    private long startTime;
+    private long endTime;
     private String title;
 
-    public Meeting(Timestamp startTime, Timestamp endTime, String title) {
+    public Meeting(long startTime, long endTime, String title) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.title = title;
     }
 
-    public Timestamp getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public String getFormattedEndTime(){
+        return getFormattedDate(endTime);
+    }
+
+    public String getFormattedStartTime(){
+        return getFormattedDate(startTime);
+    }
+
+    private String getFormattedDate(long longDate){
+        Date date = new Date(longDate);
+        DateFormat df = new SimpleDateFormat(ISO_DATE_FORMAT_ZERO_OFFSET);
+        String dateAsString = df.format(date);
+
+        return dateAsString;
+    }
+
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 
@@ -29,11 +49,11 @@ public class Meeting {
         this.title = title;
     }
 
-    public Timestamp getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 }

@@ -3,14 +3,22 @@ package com.test.calendar;
 import com.test.meeting.response.Meeting;
 import com.test.meetings.MeetingsRunTimeException;
 
-import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Calendar;
 
-class MeetingImpl {
+public class MeetingImpl {
     private Meeting meeting;
+
+    public Meeting getMeeting() {
+        return meeting;
+    }
 
     static final long MIN_15 = 15 * 60 * 1000;
     static final long HOURS_2 = 2 * 60 * 60 * 1000;
+
+    public MeetingImpl(long startDate, long endDate, String meetingTitle) throws ParseException {
+        this(new Meeting(startDate, endDate, meetingTitle));
+    }
 
     MeetingImpl(Meeting meeting) {
          this.meeting = meeting;
@@ -47,7 +55,7 @@ class MeetingImpl {
             throw new MeetingsRunTimeException("Meetings are not allowed on Saturday");
         }
 
-        long meetingTime = getEndTime().getTime() - getStartTime().getTime();
+        long meetingTime = getEndTime() - getStartTime();
 
         if (meetingTime < MIN_15) {
             throw new MeetingsRunTimeException("Meeting is less than 15 min");
@@ -58,13 +66,13 @@ class MeetingImpl {
     }
 
     long getMeetingTimeInMS(){
-        return getEndTime().getTime() - getStartTime().getTime();
+        return getEndTime() - getStartTime();
     }
-    Timestamp getEndTime() {
+    long getEndTime() {
         return meeting.getEndTime();
     }
 
-    Timestamp getStartTime() {
+    long getStartTime() {
         return meeting.getStartTime();
     }
 

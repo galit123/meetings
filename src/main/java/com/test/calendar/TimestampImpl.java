@@ -5,56 +5,56 @@ import java.util.Calendar;
 
 
 class TimestampImpl {
-    private Timestamp timestamp;
+    private long timestamp;
 
-    TimestampImpl(Timestamp timestamp) {
+    TimestampImpl(long timestamp) {
         this.timestamp = timestamp;
     }
 
-    Timestamp getTimestamp(){
+    long getTimestamp(){
         return timestamp;
     }
 
     int getDayOfWeek() {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(timestamp);
+        cal.setTimeInMillis(timestamp);
 
         return (cal.get(Calendar.DAY_OF_WEEK));
     }
 
     int getWeekOfYear() {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(timestamp);
+        cal.setTimeInMillis(timestamp);
 
         return (cal.get(Calendar.WEEK_OF_YEAR));
     }
 
     int getYear() {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(timestamp);
+        cal.setTimeInMillis(timestamp);
 
         return (cal.get(Calendar.YEAR));
     }
 
-    boolean afterOrEquals(Timestamp ts) {
-        return timestamp.after(ts) || timestamp.equals(ts);
+    boolean afterOrEquals(long ts) {
+        return (timestamp > ts) || (timestamp == ts);
     }
 
-    boolean beforeOrEquals(Timestamp ts){
-        return timestamp.before(ts)|| timestamp.equals(ts);
+    boolean beforeOrEquals(long ts){
+        return (timestamp < ts || timestamp == ts);
     }
 
 
     long getTime() {
-        return timestamp.getTime();
+        return timestamp;
     }
 
-    public boolean before(Timestamp ts) {
-        return timestamp.before(ts);
+    public boolean before(long ts) {
+        return (timestamp < ts);
     }
 
 
-    public boolean after(Timestamp ts) {
-        return timestamp.after(ts);
+    public boolean after(long ts) {
+        return (timestamp > ts);
     }
 }

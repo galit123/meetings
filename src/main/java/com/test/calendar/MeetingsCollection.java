@@ -5,6 +5,9 @@ import com.test.meetings.MeetingNotFoundException;
 import com.test.meetings.MeetingsRunTimeException;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MeetingsCollection {
@@ -14,7 +17,6 @@ public class MeetingsCollection {
 
     public static final int HOURS_40_MS = 40 * 60 * 60 * 1000;
     public static final int HOURS_10_MS = 10 * 60 * 60 * 1000;
-
 
     public  List<Meeting>  getMeetings(){
         return new ArrayList<Meeting>(meetings.values());
@@ -27,7 +29,7 @@ public class MeetingsCollection {
         aggregateMeetingToDay(newMeeting);
         aggregateMeetingToWeeks(newMeeting);
 
-        long startTime = meeting.getStartTime().getTime();
+        long startTime = meeting.getStartTime();
         if (meetings.ceilingEntry(startTime) != null){
             long prev = meetings.ceilingKey(startTime);
             Meeting prevMeeting = meetings.get(prev);
@@ -46,7 +48,7 @@ public class MeetingsCollection {
             }
         }
 
-        meetings.put(meeting.getStartTime().getTime(), meeting);
+        meetings.put(meeting.getStartTime(), meeting);
 
     }
 
@@ -137,6 +139,9 @@ public class MeetingsCollection {
     }
 
     public void remove(long startTime) {
+        if (!meetings.containsKey(startTime)){
+            throw new MeetingNotFoundException("Meeting not found");
+        }
         meetings.remove(startTime);
     }
 }
