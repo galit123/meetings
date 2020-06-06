@@ -2,12 +2,12 @@
 
 This microservice handles scheduling of meetings
 
-To schedule a new meeting:
-==========================<br>
+#To schedule a new meeting:<br>
 
-method: POST <br>
-URL: /meetings <br>
-body: <br>
+method: POST<br>
+URL: /meetings<br>
+body:<br>
+
 {
 "startTime": "2020-06-07T10:30:26.514+00:00",
 "endTime": "2020-06-07T11:15:26.514+00:00",
@@ -15,11 +15,10 @@ body: <br>
 }
 
 
-To remove a meeting by title:
-=============================
-method: DELETE
-URL: /meetings/title
-Params: meetingTitle
+#To remove a meeting by title:<br>
+method: DELETE<br>
+URL: /meetings/title<br>
+Params: meetingTitle<br>
 
 example: 
 DELETE
