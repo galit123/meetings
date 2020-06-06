@@ -11,7 +11,7 @@ public class MeetingsRunTimeException extends RuntimeException {
         super(s);
     }
 
-    public MeetingsRunTimeException(ParseException e) {
+    public MeetingsRunTimeException(Exception e) {
         super(e);
     }
 }
