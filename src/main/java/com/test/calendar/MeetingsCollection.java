@@ -10,8 +10,11 @@ import java.util.*;
 public class MeetingsCollection {
     private TreeMap<Long , Meeting> meetings = new TreeMap<Long, Meeting>();
     private Map<Long, Integer> weeks = new HashMap<Long, Integer>();
+    private Map<Long, Integer> days = new HashMap<Long, Integer>();
 
     public static final int HOURS_40_MS = 40 * 60 * 60 * 1000;
+    public static final int HOURS_10_MS = 10 * 60 * 60 * 1000;
+
 
     public  List<Meeting>  getMeetings(){
         return new ArrayList<Meeting>(meetings.values());
@@ -21,6 +24,7 @@ public class MeetingsCollection {
         MeetingImpl newMeeting = new MeetingImpl(meeting);
         newMeeting.validate();
 
+        aggregateMeetingToDay(newMeeting);
         aggregateMeetingToWeeks(newMeeting);
 
         long startTime = meeting.getStartTime().getTime();
@@ -64,13 +68,41 @@ public class MeetingsCollection {
         }
 
         weeks.put(firstDayOfWeek, hoursTotal);
-
-
     }
+
+    private void aggregateMeetingToDay(MeetingImpl m) {
+        TimestampImpl ts = new TimestampImpl(m.getStartTime());
+
+        long startTime = getStartOfDay(ts.getTime());
+
+        int hoursTotal = 0;
+        if (!days.containsKey(startTime)){
+            days.put(startTime, hoursTotal);
+        } else {
+            hoursTotal = days.get(startTime);
+        }
+
+        hoursTotal += m.getMeetingTimeInMS();
+        if (hoursTotal > HOURS_10_MS){
+            throw new MeetingsRunTimeException("Meetings time in this day exceede 10 hours");
+        }
+
+        days.put(startTime, hoursTotal);
+    }
+
+    private long getStartOfDay(long time) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
 
     private long getFirstDayOfWeek(long time){
 
-        // get today and clear time of day
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(time);
         cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
@@ -80,8 +112,6 @@ public class MeetingsCollection {
 
         // get start of this week in milliseconds
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        System.out.println("Start of this week:       " + cal.getTime());
-        System.out.println("... in milliseconds:      " + cal.getTimeInMillis());
         return cal.getTimeInMillis();
 
     }
