@@ -16,8 +16,8 @@ public class MeetingImpl {
     static final long MIN_15 = 15 * 60 * 1000;
     static final long HOURS_2 = 2 * 60 * 60 * 1000;
 
-    public MeetingImpl(long startDate, long endDate, String meetingTitle) throws ParseException {
-        this(new Meeting(startDate, endDate, meetingTitle));
+    public MeetingImpl(long startTime, long endTime, String meetingTitle) throws ParseException {
+        this(new Meeting(startTime, endTime, meetingTitle));
     }
 
     MeetingImpl(Meeting meeting) {

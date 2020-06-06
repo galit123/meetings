@@ -21,11 +21,11 @@ public class Meeting {
         return endTime;
     }
 
-    public String getFormattedEndTime(){
+    public String getToTime(){
         return getFormattedDate(endTime);
     }
 
-    public String getFormattedStartTime(){
+    public String getFromTime(){
         return getFormattedDate(startTime);
     }
 

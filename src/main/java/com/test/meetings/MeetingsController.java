@@ -3,27 +3,23 @@ package com.test.meetings;
 import com.test.meeting.response.Meeting;
 import com.test.meeting.response.MeetingsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 
 @RestController
-public class MeetingsController implements ErrorController {
+public class MeetingsController  {
 
     @Autowired
     private MeetingsManager meetingsManager;
 
     @PostMapping(path = "/meetings")
-    public MeetingsResponse SetMeeting(@RequestParam("startDate") String startDate,
-                                       @RequestParam("endDate") String endDate,
+    public MeetingsResponse SetMeeting(@RequestParam("fromTime") String startTime,
+                                       @RequestParam("toTime") String endTime,
                                        @RequestParam("meetingTitle") String meetingTitle ){
         Meeting meeting = null;
         try {
-             meeting = meetingsManager.addMeeting(startDate, endDate, meetingTitle);
+             meeting = meetingsManager.addMeeting(startTime, endTime, meetingTitle);
         } catch (ParseException e) {
             throw new MeetingsRunTimeException(e);
         }
@@ -56,18 +52,18 @@ public class MeetingsController implements ErrorController {
         return new MeetingsResponse(meetingsManager.getMeetings(),"meetings");
     }
 
-    @RequestMapping("/error")
-    @ResponseBody
-    public String handleError(HttpServletRequest request) {
-        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
-        return String.format("<html><body><h2>Error Page</h2><div>Status code: <b>%s</b></div>"
-                        + "<div>Exception Message: <b>%s</b></div><body></html>",
-                statusCode, exception==null? "N/A": exception.getMessage());
-    }
-
-    @Override
-    public String getErrorPath() {
-        return "/error";
-    }
+//    @RequestMapping("/error")
+//    @ResponseBody
+//    public String handleError(HttpServletRequest request) {
+//        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+//        Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
+//        return String.format("<html><body><h2>Error Page</h2><div>Status code: <b>%s</b></div>"
+//                        + "<div>Exception Message: <b>%s</b></div><body></html>",
+//                statusCode, exception==null? "N/A": exception.getMessage());
+//    }
+//
+//    @Override
+//    public String getErrorPath() {
+//        return "/error";
+//    }
 }

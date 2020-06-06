@@ -75,8 +75,8 @@ public class MeetingsManager {
         return meetings.nextMeeting();
     }
 
-    public Meeting addMeeting(String startDate, String endDate, String meetingTitle) throws ParseException {
-        MeetingImpl meeting = new MeetingImpl(getLongDate(startDate), getLongDate(endDate), meetingTitle);
+    public Meeting addMeeting(String startTime, String endTime, String meetingTitle) throws ParseException {
+        MeetingImpl meeting = new MeetingImpl(getLongDate(startTime), getLongDate(endTime), meetingTitle);
         return addMeeting(meeting.getMeeting());
     }
 }
