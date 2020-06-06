@@ -9,6 +9,9 @@ import java.util.*;
 
 public class MeetingsCollection {
     private TreeMap<Long , Meeting> meetings = new TreeMap<Long, Meeting>();
+    private Map<Long, Integer> weeks = new HashMap<Long, Integer>();
+
+    public static final int HOURS_40_MS = 40 * 60 * 60 * 1000;
 
     public  List<Meeting>  getMeetings(){
         return new ArrayList<Meeting>(meetings.values());
@@ -17,6 +20,8 @@ public class MeetingsCollection {
     public void addMeeting(Meeting meeting){
         MeetingImpl newMeeting = new MeetingImpl(meeting);
         newMeeting.validate();
+
+        aggregateMeetingToWeeks(newMeeting);
 
         long startTime = meeting.getStartTime().getTime();
         if (meetings.ceilingEntry(startTime) != null){
@@ -38,6 +43,47 @@ public class MeetingsCollection {
         }
 
         meetings.put(meeting.getStartTime().getTime(), meeting);
+
+    }
+
+    private void aggregateMeetingToWeeks(MeetingImpl m) {
+        TimestampImpl ts = new TimestampImpl(m.getStartTime());
+
+        long firstDayOfWeek = getFirstDayOfWeek(ts.getTime());
+
+        int hoursTotal = 0;
+        if (!weeks.containsKey(firstDayOfWeek)){
+            weeks.put(firstDayOfWeek, hoursTotal);
+        } else {
+            hoursTotal = weeks.get(firstDayOfWeek);
+        }
+
+        hoursTotal += m.getMeetingTimeInMS();
+        if (hoursTotal > HOURS_40_MS){
+            throw new MeetingsRunTimeException("Meetings time in this week exceede 40 hours");
+        }
+
+        weeks.put(firstDayOfWeek, hoursTotal);
+
+
+    }
+
+    private long getFirstDayOfWeek(long time){
+
+        // get today and clear time of day
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(time);
+        cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+
+        // get start of this week in milliseconds
+        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+        System.out.println("Start of this week:       " + cal.getTime());
+        System.out.println("... in milliseconds:      " + cal.getTimeInMillis());
+        return cal.getTimeInMillis();
+
     }
 
 

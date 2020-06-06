@@ -57,6 +57,9 @@ class MeetingImpl {
 
     }
 
+    long getMeetingTimeInMS(){
+        return getEndTime().getTime() - getStartTime().getTime();
+    }
     Timestamp getEndTime() {
         return meeting.getEndTime();
     }
