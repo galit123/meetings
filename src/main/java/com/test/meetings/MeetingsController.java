@@ -24,13 +24,13 @@ public class MeetingsController  {
         } catch (ParseException e) {
             throw new MeetingsRunTimeException(e);
         }
-        return new MeetingsResponse(meeting, "meeting added", HttpStatus.OK);
+        return new MeetingsResponse(meeting, "meeting added", HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/meetings/title")
     public MeetingsResponse RemoveMeetingByTitle(@RequestParam("meetingTitle") String meetingTitle) {
         meetingsManager.removeByTitle(meetingTitle);
-        return new MeetingsResponse("'" + meetingTitle + "'" + " meeting deleted", HttpStatus.OK);
+        return new MeetingsResponse("meeting '" + meetingTitle + "'" + " is deleted", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(path = "/meetings")
@@ -40,7 +40,7 @@ public class MeetingsController  {
         } catch (ParseException e) {
             throw new MeetingsRunTimeException(e);
         }
-        return new MeetingsResponse("meeting from " + fromTime +"deleted", HttpStatus.OK);
+        return new MeetingsResponse("meeting from " + fromTime +" is deleted", HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(path = "/meetings/next")
