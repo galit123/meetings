@@ -1,7 +1,7 @@
-package com.test.meetings;
+package com.ex.meetings.impl;
 
-import com.test.calendar.*;
-import com.test.meeting.response.Meeting;
+import com.ex.meetings.response.Meeting;
+import com.ex.meetings.errorhandling.MeetingNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,20 +19,6 @@ public class MeetingsManager {
     private Map<String, List<Meeting>> meetingsListsByTitle = new HashMap<String, List<Meeting>>();
     public static final String ISO_DATE_FORMAT_ZERO_OFFSET = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-
-    @PostConstruct
-    private void initialize() throws IOException {
-        Date date = new Date();
-
-        Timestamp start = new Timestamp(date.getTime() - 52 * 60 * 60 * 1000);
-        Timestamp end = new Timestamp(date.getTime() - 50 * 60 * 60 * 1000);
-        this.addMeeting(new Meeting(start.getTime(), end.getTime(), "this is my meeting"));
-
-        start = new Timestamp(date.getTime() - 124 * 60 * 60 * 1000);
-        end = new Timestamp(date.getTime() - 122 * 60 * 60 * 1000);
-        this.addMeeting(new Meeting(start.getTime(), end.getTime(), "second meeting"));
-
-    }
 
     public List<Meeting> getMeetings() {
         return meetings.getMeetings();

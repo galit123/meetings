@@ -1,4 +1,4 @@
-package com.test.meetings;
+package com.ex.meetings.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

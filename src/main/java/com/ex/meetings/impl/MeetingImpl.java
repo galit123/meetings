@@ -1,7 +1,7 @@
-package com.test.calendar;
+package com.ex.meetings.impl;
 
-import com.test.meeting.response.Meeting;
-import com.test.meetings.MeetingsRunTimeException;
+import com.ex.meetings.response.Meeting;
+import com.ex.meetings.errorhandling.MeetingsRunTimeException;
 
 import java.text.ParseException;
 import java.util.Calendar;

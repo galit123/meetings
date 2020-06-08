@@ -1,4 +1,4 @@
-package com.test.calendar;
+package com.ex.meetings.impl;
 
 import java.util.Calendar;
 

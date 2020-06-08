@@ -1,7 +1,6 @@
-package com.test.meeting.response;
+package com.ex.meetings.response;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.test.meeting.response.Meeting;
 import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;

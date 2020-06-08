@@ -1,4 +1,4 @@
-package com.test.meetings;
+package com.ex.meetings.errorhandling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

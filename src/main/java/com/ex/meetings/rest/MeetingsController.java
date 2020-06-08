@@ -1,7 +1,9 @@
-package com.test.meetings;
+package com.ex.meetings.rest;
 
-import com.test.meeting.response.Meeting;
-import com.test.meeting.response.MeetingsResponse;
+import com.ex.meetings.errorhandling.MeetingsRunTimeException;
+import com.ex.meetings.impl.MeetingsManager;
+import com.ex.meetings.response.Meeting;
+import com.ex.meetings.response.MeetingsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

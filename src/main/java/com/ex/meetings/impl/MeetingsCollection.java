@@ -1,8 +1,8 @@
-package com.test.calendar;
+package com.ex.meetings.impl;
 
-import com.test.meeting.response.Meeting;
-import com.test.meetings.MeetingNotFoundException;
-import com.test.meetings.MeetingsRunTimeException;
+import com.ex.meetings.response.Meeting;
+import com.ex.meetings.errorhandling.MeetingNotFoundException;
+import com.ex.meetings.errorhandling.MeetingsRunTimeException;
 
 import java.sql.Timestamp;
 import java.util.*;

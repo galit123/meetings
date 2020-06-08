@@ -1,7 +1,8 @@
-package com.test.meetings;
+package com.ex.meetings.errorhandling;
 
-import com.test.meeting.response.Meeting;
-import com.test.meeting.response.MeetingsResponse;
+import com.ex.meetings.errorhandling.MeetingNotFoundException;
+import com.ex.meetings.errorhandling.MeetingsRunTimeException;
+import com.ex.meetings.response.MeetingsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
