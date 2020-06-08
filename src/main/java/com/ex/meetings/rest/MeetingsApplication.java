@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({"com.ex.meetings"})
-@EnableAutoConfiguration
 public class MeetingsApplication {
 
 	public static void main(String[] args) {
