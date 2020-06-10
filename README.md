@@ -3,7 +3,7 @@
 This microservice handles scheduling and removing of meetings
 
 ####To start the microservice:
-* Go to the file: <i>'com/test/meetings/MeetingsApplication.java'</i><br>
+* Go to the file: <i>'com.ex.meetings.rest.MeetingsApplication.java'</i><br>
 * Right-click anywhere on the source<br>
 * Select <i>'Run MeetingsApplication.main'</i>
 
